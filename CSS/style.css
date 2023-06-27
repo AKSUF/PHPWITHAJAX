@@ -1,0 +1,48 @@
+.container {
+    background-image: url('../Image/DemoCreatorSnap_2023-06-26 07-04-20.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 50%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.firstchild {
+    background-color: rgb(82, 116, 49);
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.secondchild {
+    background-color: bisque;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid black;
+}
+
+#title {
+    text-align: center;
+}
+
+.thirdchild {
+    background-color: cornflowerblue;
+    height: 100px;
+}
