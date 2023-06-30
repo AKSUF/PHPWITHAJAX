@@ -122,6 +122,49 @@ $(document).ready(function() {
             }
         })
     });
+    //pagintion
+    function loadTable(page) {
+        $.ajax({
+            url: '../Load/ajax-pagination.php',
+            type: "POST",
+            data: { page_no: page },
+            success: function(data) {
+                $('#table-data').html(data);
+            }
+        });
+    }
+
+    loadTable(1); // You can provide a default page number or adjust it as per your requirements.
+
+    $(document).on("click", "#pagination a", function(e) {
+        e.preventDefault();
+        var page_id = $(this).attr("id");
+        loadTable(page_id);
+    });
+    //load pagination
+    function loadesrTable(page) {
+        $.ajax({
+            url: "../Load/ajaxload_paination.php",
+            type: "POST",
+            data: {
+                page: page
+            },
+            success: function(data) {
+                if (data) {
+                    $('#pagination').remove();
+                    $("#loadData").append(data);
+                } else {
+                    $("#ajaxbtn").prop("disabled", true);
+                }
+
+            }
+        })
+    }
+    loadesrTable();
+    $(document).on("click", "#ajaxbtn", function() {
+        var pid = $(this).data("id");
+        loadesrTable(pid);
+    });
 
 
 });
