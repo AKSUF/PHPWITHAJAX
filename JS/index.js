@@ -166,5 +166,32 @@ $(document).ready(function() {
         loadesrTable(pid);
     });
 
+    //serializer
+    $("#submit-btn").click(function(event) {
+        event.preventDefault();
+        var name = $("#name").val();
+        var age = $("#age").val();
+        var gender = $('input:radio[name=gender]:checked').val();
 
-});
+        if (name == "" || age == "" || gender == undefined) {
+            $('#response').fadeIn();
+            $('#response').removeClass('success-msg').addClass('error-msg').html("All fields are required");
+        } else {
+            $('#response').html($('#submit').serialize());
+            $.ajax({
+                url: "../Load/save-form.php",
+                type: "POST",
+                data: $('#submit').serialize(),
+                success: function(data) {
+                    $('#submit').trigger("reset");
+                    $('#response').fadeIn();
+                    $('#response').removeClass('error-msg').addClass('success-msg').html(data);
+                    setTimeout(function() {
+                        $('#response').fadeOut("slow");
+                    }, 4000);
+                }
+            })
+        }
+    });
+
+})
