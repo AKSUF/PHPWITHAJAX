@@ -194,4 +194,33 @@ $(document).ready(function() {
         }
     });
 
+
+    ///vide no 9
+    //$.post $.get method
+    $("#save_form").submit(function(event) {
+        event.preventDefault();
+
+        var first_name = $("#first_name").val();
+        var last_name = $("#last_name").val();
+
+        if (first_name === "" || last_name === "") {
+            $("#response").fadeIn();
+            $("#response").removeClass("success-msg").addClass("error-msg").html("All fields are required");
+        } else {
+            $.post(
+                "../Load/save-forms.php",
+                $("#save_form").serialize(),
+                function(data) {
+                    if (data == 1) {
+                        $("#save_form").trigger("reset");
+                        $("#response").fadeIn();
+                        $("#response").removeClass("error-msg").addClass("success-msg").html("Data successfully saved");
+                        setTimeout(function() {
+                            $("#response").fadeOut();
+                        }, 5000);
+                    }
+                }
+            );
+        }
+    });
 })
