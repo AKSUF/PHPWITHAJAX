@@ -53,20 +53,78 @@ $(document).ready(function() {
     });
     //fetch single record:show in modal box
     $(document).on("click", "")
-        //function for more to JSON object
-
-
-
-    //insert new record
-    $("#save-button").on("click", function(e) {
-        e.preventDefault();
-        var arr = $("#addform").serializeArray();
+        //show success or error message
+    function message(message, status) {
+        if (status == true) {
+            $("#success-message").html(message).slideDown();
+            $("#error-message").slideUp();
+            setTimeout(function() {
+                $("#success-message").slideUp();
+            }, 4000);
+        } else if (status == false) {
+            $("#error-message").html(message).slideDown();
+            $("#success-message").slideUp();
+            setTimeout(function() {
+                $("#error-message").slideUp();
+            }, 4000);
+        }
+    }
+    //function for more to JSON object
+    function jsonData(targetForm) {
+        var arr = $(targetForm).serializeArray();
         var obj = {};
         for (var a = 0; a < arr.length; a++) {
+            if (arr[a].value == "") {
+                return false;
+            }
             obj[arr[a].name] = arr[a].value;
         }
         var json_string = JSON.stringify(obj);
-        console.log(json_string);
+        return json_string;
+    }
+    //insert new record
+    $("#save-button").on("click", function(e) {
+            e.preventDefault();
+            var jsonObject = jsonData("#addform");
+            if (jsonObject == false) {
+                message("All fields are required", false);
+            } else {
+                $.ajax({
+                    url: "http://localhost/PHPAJAX/Restpart/api_post.php",
+                    type: "POST",
+                    data: jsonObject,
+                    success: function(data) {
+                        message(data.message, data.status);
+                        if (data.status == true) {
+                            loadtable();
+                            $("#addform").trigger("reset");
+                        }
+                    }
+                })
+            }
+            console.log(jsonObject);
+        })
+        //edit record
+    $("#edit_submit").on("click", function(e) {
+        e.preventDefault();
+        var jsonObject = jsonData("#edit_form");
+        if (jsonObject == false) {
+            message("All fields are required", false);
+        } else {
+            $.ajax({
+                url: "http://localhost/PHPAJAX/Restpart/api_edit.php",
+                type: "POST",
+                data: jsonObject,
+                success: function(data) {
+                    message(data.message, data.status);
+                    if (data.status == true) {
+                        loadtable();
+                        $("#exampleModal").modal("hide"); // Hide the modal after successful update
+                    }
+                }
+            })
+        }
+        console.log(jsonObject);
     })
 
 });

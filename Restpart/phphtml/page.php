@@ -12,6 +12,8 @@
     </style>
 </head>
 <body>
+    <div id="error-message" class="message"></div>
+    <div id="success-message" class="message"></div>
     <div id="table-form">
         <form action="" id="addform">
           Name:  <input type="text" name="name" id="name">
@@ -42,8 +44,9 @@
                     <div class="modal-header">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <form action="" id="edit_form">
                     <div class="modal-body">
-<form action="">
+
 <div>
     <h1>Name</h1>
 <input type="text" name="name" id="edit-name">
@@ -61,13 +64,11 @@
     <h1>Country</h1>
     <input type="text" name="country" id="edit-country">
 </div>
-
-</form>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-primary" id="edit_submit">Save changes</button>
+            </form>            
                     </div>
                 </div>
             </div>
