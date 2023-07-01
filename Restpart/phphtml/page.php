@@ -12,6 +12,13 @@
     </style>
 </head>
 <body>
+    <div id="search-bar">
+<label for="">Search:</label>
+<input type="text" id="search" autocomplete="off">
+    </div>
+
+
+    
     <div id="error-message" class="message"></div>
     <div id="success-message" class="message"></div>
     <div id="table-form">

@@ -127,4 +127,54 @@ $(document).ready(function() {
         console.log(jsonObject);
     })
 
+    $(document).on("click", ".delete-btn", function() {
+        if (confirm("Do you realy want to delete this record")) {
+            var id = $(this).data("id");
+            var obj = { id: id };
+            var myJson = JSON.stringify(obj);
+            var row = this;
+            $.ajax({
+                url: 'http://localhost/PHPAJAX/Restpart/api_delete.php',
+                type: "POST",
+                data: myJson,
+                success: function(data) {
+                    message(data.message, data.status);
+                    if (data.status == true) {
+                        $(row).closest("tr").fadeOut();
+                    }
+                }
+            })
+        }
+
+    })
+    $("#search").on("keyup", function() {
+        var search_term = $(this).val();
+        $("#load_table").html("");
+        $.ajax({
+            url: 'http://localhost/PHPAJAX/Restpart/api_search.php?search=' + search_term,
+            type: "GET",
+            success: function(data) {
+                if (data.status == false) {
+                    $("#load-table").append("<tr><td colspan='6'><h2>" +
+                        data.message + "</h2></td></tr>");
+                } else {
+                    $.each(data, function(key, value) {
+                        $("#load-table").append("<tr>" +
+                            "<td>" + value.id + "</td>" +
+                            "<td>" + value.name + "</td>" +
+                            "<td>" + value.age + "</td>" +
+                            "<td>" + value.gender + "</td>" +
+                            "<td>" + value.country + "</td>" +
+                            "<td><button class='edit-btn' data-eid='" +
+                            value.id + "'>Edit</button></td>" +
+                            "<td><button class='delete-btn' data-id='" +
+                            value.id + "'>Delete</button></td>" +
+                            "</tr>");
+                    });
+                }
+            }
+        })
+    })
+
+
 });
