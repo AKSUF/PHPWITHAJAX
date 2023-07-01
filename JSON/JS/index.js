@@ -11,4 +11,26 @@ $(document).ready(function() {
         }
 
     })
+
+    // $.getJson(
+    //     "fetchs-json.php",
+    //     function(data) {
+    //         $.each(data, function(key, value) {
+    //             $("#loaded-data").append(value.id + "" + value.first_name + "" + value.last_name);
+
+    //         })
+    //     }
+
+    // )
+    $.getJSON({
+        url: "../fetchs_json.php",
+        type: "POST",
+        data: { id: 1 },
+        dataType: "JSON",
+        success: function(data) {
+            $.each(data, function(key, value) {
+                $("#loaded_data").append(value.id + " " + value.first_name + " " + value.last_name);
+            });
+        }
+    });
 })
