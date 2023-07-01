@@ -13,6 +13,4 @@ foreach ($arr as list('id'=>$id,"title"=>$title,"body"=>$body)){
 }
 
 echo '</table>';
-
-
 ?>
