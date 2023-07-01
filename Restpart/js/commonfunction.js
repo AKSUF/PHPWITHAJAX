@@ -53,11 +53,20 @@ $(document).ready(function() {
     });
     //fetch single record:show in modal box
     $(document).on("click", "")
-        //insert new record
+        //function for more to JSON object
+
+
+
+    //insert new record
     $("#save-button").on("click", function(e) {
         e.preventDefault();
         var arr = $("#addform").serializeArray();
-        console.log(arr);
+        var obj = {};
+        for (var a = 0; a < arr.length; a++) {
+            obj[arr[a].name] = arr[a].value;
+        }
+        var json_string = JSON.stringify(obj);
+        console.log(json_string);
     })
 
 });
