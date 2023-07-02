@@ -1,11 +1,3 @@
-// $.ajax({
-//     url: "https://sales-tax-rates1.p.rapidapi.com/v/api/?zip=99502",
-//     type: "GET",
-//     dataType: "JSON",
-//     success: function(data) {
-//         console.log(data);
-//     }
-// })$(document).ready(function() {
 const settings = {
     async: true,
     crossDomain: true,
